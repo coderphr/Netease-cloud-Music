@@ -12,8 +12,9 @@
     <div class="tab-search">
       <span>
         <div class="search-img"></div>
-        <input type="text" value="" placeholder="音乐/视频/电台/用户" />
+        <input type="text" v-model="inpValue" placeholder="音乐/视频/电台/用户" @input="valueChange()" @focus="getFocus()" @blur="lostFocus()"/>
       </span>
+      <search v-show="isShow" :songsList="songsList" :singersList="singersList"></search>
     </div>
    <a class="tab-center" href="javascript:;">创作者中心</a>
    <a class="tab-login" href="javascript:;">登录</a>
@@ -21,8 +22,16 @@
 </template>
 
 <script>
+import {getSearch} from '@/network/find'
+//引入防抖函数
+import {debounce} from '@/utils/debounce'
+//引入搜索组件
+import Search from './search'
 export default {
   name: "tabbar",
+  components:{
+    Search
+  },
   data() {
     return {
        titles:[
@@ -31,13 +40,49 @@ export default {
         {'title':'朋友','path':'/friend'},
         {'title':'音乐人','path':'/musician'},
       ],
-      current: 0
+      current: 0,
+      isShow:false,
+      inpValue:'',
+      songsList:[],
+      singersList:[]
     };
   },
+  mounted() {
+    //防抖操作
+    this.valueChange = debounce(this.getList,500)
+  },
   methods:{
+    //路由切换
     btnClick(index,path) {
       this.current = index;
       this.$emit('titleClick',path)
+    },
+    getList() {
+      getSearch(this.inpValue).then(data => {
+        //保存搜索返回的数据
+        this.songsList = data.result.songs
+      })
+      getSearch(this.inpValue,100).then(data => {
+        //保存搜索返回的数据
+        this.singersList = data.result.artists.splice(0,3)
+      })
+    },
+    valueChange() {
+    },
+    getFocus() {
+      this.inpValue.trim() != '' ? this.isShow = true : false
+    },
+    lostFocus() {
+      let timer = null;
+      if(timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        this.isShow = false;
+      },100)
+    }
+  },
+  watch: {
+    inpValue(newVal,oldVal) {
+      newVal.trim() != '' ? this.isShow = true :this.isShow = false;
     }
   }
 };
@@ -114,6 +159,7 @@ export default {
   border-radius: 40px;
   background-color: #ffffff;
 }
+
 .tab-search  .search-img {
   float: left;
   margin-top: 5px;
@@ -155,3 +201,8 @@ export default {
   text-decoration: underline;
 }
 </style>
+
+
+
+
+

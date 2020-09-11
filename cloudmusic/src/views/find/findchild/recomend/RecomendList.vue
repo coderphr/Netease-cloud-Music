@@ -10,7 +10,7 @@
     </div>
     <div class="hot-list">
       <div class="list-item" v-for="item in lists" :key="item.id">
-        <img :src="item.picUrl" alt="">
+        <img v-lazy="item.picUrl" alt="">
         <div class="list-name"><a href="javascript:;">{{item.name}}</a></div>
         <div class="list-mask">
           <span class="headset"></span>
@@ -138,18 +138,19 @@ ul li:after {
 }
 .list-name {
   margin-top: 5px;
-  width: 65%;
+  width: 67%;
 }
 .list-name a{
   color: #000000;}
 .list-mask {
   position: absolute;
-  bottom: 43px;
+  top: 153px;
   width: 65%;
   height: 30px;
   line-height: 30px;
   background-color: rgba(000, 000, 000, .4);
 }
+
 .headset {
   position:absolute;
   top: 8px;

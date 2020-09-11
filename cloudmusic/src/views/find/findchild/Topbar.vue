@@ -21,7 +21,7 @@ export default {
     return {
       titles: [
         { title: "推荐", path: "/recomend" },
-        { title: "排行榜", path: "/rank" },
+        { title: "排行榜", path: "/rank"},
         { title: "歌单", path: "/songs" },
         { title: "主播电台", path: "/radio" },
         { title: "歌手", path: "/singers" },
@@ -29,8 +29,7 @@ export default {
       ],
       current: 0
     };
-  },
-  methods: {}
+  }
 };
 </script>
 

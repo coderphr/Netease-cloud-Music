@@ -1,7 +1,7 @@
 <template>
    <el-carousel height="300px" class="siwper">
-      <el-carousel-item v-for="item in swiperList" :key="item.targetId">
-        <img :src="item.picUrl" alt="">
+      <el-carousel-item v-for="(item,index) in swiperList" :key="index">
+        <img :src="item.imageUrl" alt="">
       </el-carousel-item>
     </el-carousel>
 </template>
@@ -12,7 +12,7 @@ export default {
     swiperList:{
       type:Array,
       default() {
-        return {}
+        return []
       }
     }
   }

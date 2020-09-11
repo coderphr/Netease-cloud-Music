@@ -3,7 +3,7 @@ import axios from 'axios'
 export function request(config) {
   //创建axios示例
   const instance = axios.create({
-    baseURL:'http://musicapi.leanapp.cn',
+    baseURL:'http://123.207.32.32:9001',
     timeout:5000
   })
   //请求拦截

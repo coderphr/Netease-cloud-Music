@@ -45,6 +45,10 @@ const routes = [
       {
         path:'news',
         component:() => import('@/views/find/findchild/news/News')
+      },
+      {
+        path:'details',
+        component:() => import('@/components/Details')
       }
     ]
   },

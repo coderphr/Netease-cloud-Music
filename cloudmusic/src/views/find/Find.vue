@@ -1,7 +1,7 @@
 <template>
   <div class="find">
     <topbar />
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
