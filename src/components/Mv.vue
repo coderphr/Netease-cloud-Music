@@ -3,8 +3,8 @@
     <h4>
       {{ mvDetails.name }}<span>{{ mvDetails.creator }}</span>
     </h4>
-    <video :src="mvAdress" controls="controls">
-      <source :src="mvAdress" type="video/mp4" />
+    <video :src="adress" controls="controls">
+      <source :src="adress" type="video/mp4" />
       你的浏览器不支持h5标签
     </video>
     <Comments :total=total :comment=mvComments @sizechange="sizechange"/>
@@ -19,6 +19,8 @@ import {
   getItem,
   getMvAdress,
   getComment,
+  getVideoAdress,
+  getVideoComments
 } from "@/network/find";
 //导入组件
 import Comments from './Comments';
@@ -28,7 +30,7 @@ export default {
     return {
       id: null,
       mvDetails: [],
-      mvAdress: "",
+      adress: "",
       mvComments: [],
       total:'',
     };
@@ -53,10 +55,9 @@ export default {
           );
         });
         getMvAdress(id).then((data) => {
-          this.mvAdress = data.data.url;
+          this.adress = data.data.url;
         });
         getComment(id,20).then((data) => {
-          console.log(data)
           this.mvComments.push(...data.comments);
           this.mvComments.push(...data.hotComments);
           this.total = data.total;
@@ -71,6 +72,14 @@ export default {
             data.creator.nickname
           );
         });
+        getVideoAdress(id).then(data => {
+          this.adress = data.urls[0].url;
+        });
+        getVideoComments(id).then(data => {
+          this.mvComments.push(...data.comments);
+          this.mvComments.push(...data.hotComments);
+          this.total = data.total;
+        })
       }
     },
     //页数改变获取新评论数据

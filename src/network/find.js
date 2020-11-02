@@ -55,17 +55,7 @@ export function getMv(mvid) {
     }
   })
 }
-//获取视频video信息 
-export function getVideo(id) {
-  return request({
-    url:'video/detail',
-    params:{
-      id
-    }
-  })
-}
-
-//获取video地址
+//获取mv地址
 export function getMvAdress(id) {
   return request({
     url:'mv/url',
@@ -75,7 +65,7 @@ export function getMvAdress(id) {
   })
 }
 
-//获取mv品论
+//获取mv评论
 export function getComment(id,limit=20,offset) {
   return request({
     url:'/comment/mv',
@@ -86,6 +76,37 @@ export function getComment(id,limit=20,offset) {
     }
   })
 }
+//获取视频video信息 
+export function getVideo(id) {
+  return request({
+    url:'video/detail',
+    params:{
+      id
+    }
+  })
+}
+//获取video地址
+export function getVideoAdress(id) {
+  return request({
+    url:'video/url',
+    params:{
+      id
+    }
+  })
+}
+
+//获取video评论
+export function getVideoComments(id,limit=20,offset) {
+  return request({
+    url:'comment/video',
+    params:{
+      id,
+      limit,
+      offset
+    }
+  })
+}
+
 
 //导出类
 export class getItem {
