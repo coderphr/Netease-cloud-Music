@@ -30,7 +30,6 @@
           :total="totalCount" >
         </el-pagination>
     </div>
-
   </div>
 </template>
 
@@ -62,7 +61,6 @@ export default {
   methods: {
     //每页显示条数
     handlerSizeChange(val) {
-      console.log(val)
       this.PageSize = val
       this.currentPage = 1
     },

@@ -40,12 +40,13 @@ export function getLyric(id) {
 }
 
 //获取歌曲评论
-export function getComment(id,limit=20) {
+export function getComment(id,limit=20,offset) {
   return request({
     url:'/comment/music',
     params:{
       id,
-      limit
+      limit,
+      offset
     }
   })
 }

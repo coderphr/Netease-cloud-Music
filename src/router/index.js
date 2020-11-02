@@ -49,6 +49,14 @@ const routes = [
       {
         path:'details',
         component:() => import('@/components/Details')
+      },
+      {
+        path:'searchall',
+        component:() => import('@/components/searchall/searchall')
+      },
+      {
+        path:'mv',
+        component:() => import('@/components/Mv')
       }
     ]
   },

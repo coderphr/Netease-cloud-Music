@@ -12,7 +12,7 @@
     <div class="tab-search">
       <span>
         <div class="search-img"></div>
-        <input type="text" v-model="inpValue" placeholder="音乐/视频/电台/用户" @input="valueChange()" @focus="getFocus()" @blur="lostFocus()"/>
+        <input type="text" v-model="inpValue" placeholder="音乐/视频/电台/用户" @input="valueChange()" @focus="getFocus()" @blur="lostFocus()" @keydown.enter="enterClick()"/>
       </span>
       <search v-show="isShow" :songsList="songsList" :singersList="singersList"></search>
     </div>
@@ -58,7 +58,7 @@ export default {
       this.$emit('titleClick',path)
     },
     getList() {
-      getSearch(this.inpValue).then(data => {
+      getSearch(this.inpValue,1).then(data => {
         //保存搜索返回的数据
         this.songsList = data.result.songs
       })
@@ -69,15 +69,27 @@ export default {
     },
     valueChange() {
     },
+    //获取焦点
     getFocus() {
       this.inpValue.trim() != '' ? this.isShow = true : false
     },
+    //失去焦点
     lostFocus() {
       let timer = null;
       if(timer) clearTimeout(timer);
       timer = setTimeout(() => {
         this.isShow = false;
       },100)
+    },
+    //enter键监听页面跳转
+    enterClick() {
+      this.$router.push({
+        path:'/find/searchall',
+        query:{
+          keywords:this.inpValue,
+          type:1
+        }
+      })
     }
   },
   watch: {
@@ -93,7 +105,7 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 75px;
+  height: 70px;
   background-color: #242424;
 }
 .tab-logo {
@@ -201,8 +213,3 @@ export default {
   text-decoration: underline;
 }
 </style>
-
-
-
-
-

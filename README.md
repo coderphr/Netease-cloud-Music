@@ -14,6 +14,15 @@ npm run serve
 ```
 npm run build
 ```
+### 技术栈
+```
+vue + vue-router + elementui + axios;
+elemnt ui : table +  pagenation;
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+ 
